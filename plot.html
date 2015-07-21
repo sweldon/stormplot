@@ -15,6 +15,8 @@
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="scripts/js/drawmap.js"></script>
+    <script src="scripts/js/buildCoords.js"></script>
     <script>
 
 // Simply combine plot and geolocation, i.e. 
@@ -23,70 +25,17 @@
 // Parse <polygon> object in XML 
 
 // XML example: view-source:http://alerts.weather.gov/cap/wwacapget.php?x=KS1253B493082C.FlashFloodWarning.1253B493F160KS.SGFFFWSGF.41fb5af2f9aa236c2ada8d684b37af3c
-var rawPolygon = 
+// var rawPolygon;
+// $.get( "scripts/getxml.php", function( data ) {
+// console.log(data);
 
-
-// Get polygon coordinates and parse into readable array
-//var polygonString = "37.46,-95.1 37.46,-95.08 37.4,-94.9 37.37,-94.84 37.34,-94.81 37.26,-94.81 37.23,-94.84 37.14,-94.96 37.11,-95.04 37.12,-95.08 37.38,-95.08 37.39,-95.09 37.46,-95.1";
-var polygonString = rawPolygon;
-var stringChunked = polygonString.split(" ");
-
-console.log(stringChunked);
-
-// Convert coordinates back to integers for plotting
-for(var i = 0;i<stringChunked.length;i++)
-{
-  tempChunk = stringChunked[i].split(",")
-  tempChunk[0] = parseFloat(tempChunk[0]);
-  tempChunk[1] = parseFloat(tempChunk[1]);
-  stringChunked[i] = [tempChunk[0],tempChunk[1]];
-
-}
-console.log(stringChunked);
-
-// Build Coordinate Array
-
-coordinateArray = []
-
-for(var i = 0;i<stringChunked.length;i++)
-{
-
-coordinateArray[i] = new google.maps.LatLng(stringChunked[i][0], stringChunked[i][1]);
-}
-
-function initialize() {
-  var mapOptions = {
-    zoom: 12,
-    //Center at your location, at the moment it is the county
-    center: new google.maps.LatLng(37.3458874, -94.80885040000001),
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-
-  };
-
-  var AOE;
-
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-      mapOptions);
-
-  // Define the LatLng coordinates for the polygon's path.
-  var AOEcoords = coordinateArray;
+// });
 
 
 
-  // Construct the polygon.
-  AOE = new google.maps.Polygon({
-    paths: AOEcoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
-  });
 
-  AOE.setMap(map);
-}
 
-google.maps.event.addDomListener(window, 'load', initialize);
+
 
     </script>
   </head>
