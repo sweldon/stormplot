@@ -24,39 +24,56 @@
 
 // XML example: view-source:http://alerts.weather.gov/cap/wwacapget.php?x=KS1253B493082C.FlashFloodWarning.1253B493F160KS.SGFFFWSGF.41fb5af2f9aa236c2ada8d684b37af3c
 
+
+// Get polygon coordinates and parse into readable array
+var polygonString = "37.46,-95.1 37.46,-95.08 37.4,-94.9 37.37,-94.84 37.34,-94.81 37.26,-94.81 37.23,-94.84 37.14,-94.96 37.11,-95.04 37.12,-95.08 37.38,-95.08 37.39,-95.09 37.46,-95.1";
+var stringChunked = polygonString.split(" ");
+
+console.log(stringChunked);
+
+// Convert coordinates back to integers for plotting
+for(var i = 0;i<stringChunked.length;i++)
+{
+  tempChunk = stringChunked[i].split(",")
+  tempChunk[0] = parseFloat(tempChunk[0]);
+  tempChunk[1] = parseFloat(tempChunk[1]);
+  stringChunked[i] = [tempChunk[0],tempChunk[1]];
+
+}
+console.log(stringChunked);
+
+// Build Coordinate Array
+
+coordinateArray = []
+
+for(var i = 0;i<stringChunked.length;i++)
+{
+
+coordinateArray[i] = new google.maps.LatLng(stringChunked[i][0], stringChunked[i][1]);
+}
+
 function initialize() {
   var mapOptions = {
     zoom: 12,
     //Center at your location, at the moment it is the county
     center: new google.maps.LatLng(37.3458874, -94.80885040000001),
     mapTypeId: google.maps.MapTypeId.TERRAIN
+
   };
 
-  var bermudaTriangle;
+  var AOE;
 
   var map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
   // Define the LatLng coordinates for the polygon's path.
-  var triangleCoords = [
-    new google.maps.LatLng(37.46,-95.1),
-    new google.maps.LatLng(37.46,-95.08),
-    new google.maps.LatLng(37.4,-94.9),
-    new google.maps.LatLng(37.37,-94.84),
-    new google.maps.LatLng(37.34,-94.81),
-    new google.maps.LatLng(37.26,-94.81),
-    new google.maps.LatLng(37.23,-94.84),
-    new google.maps.LatLng(37.14,-94.96),
-    new google.maps.LatLng(37.11,-95.04),
-    new google.maps.LatLng(37.12,-95.08),
-    new google.maps.LatLng(37.38,-95.08),
-    new google.maps.LatLng(37.39,-95.09),
-    new google.maps.LatLng(37.46,-95.1)
-  ];
+  var AOEcoords = coordinateArray;
+
+
 
   // Construct the polygon.
-  bermudaTriangle = new google.maps.Polygon({
-    paths: triangleCoords,
+  AOE = new google.maps.Polygon({
+    paths: AOEcoords,
     strokeColor: '#FF0000',
     strokeOpacity: 0.8,
     strokeWeight: 2,
@@ -64,7 +81,7 @@ function initialize() {
     fillOpacity: 0.35
   });
 
-  bermudaTriangle.setMap(map);
+  AOE.setMap(map);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
