@@ -5,7 +5,7 @@ var polygonString = string;
 //var polygonString = rawPolygon;
 var stringChunked = polygonString.split(" ");
 
-console.log(stringChunked);
+
 
 // Convert coordinates back to integers for plotting
 for(var i = 0;i<stringChunked.length;i++)
@@ -16,7 +16,7 @@ for(var i = 0;i<stringChunked.length;i++)
   stringChunked[i] = [tempChunk[0],tempChunk[1]];
 
 }
-console.log(stringChunked);
+
 
 // Build Coordinate Array
 

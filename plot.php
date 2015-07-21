@@ -1,7 +1,10 @@
 <?php 
  
 require_once('scripts/php/getxml.php'); 
-// getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=SC1253B493FC50.SevereThunderstormWarning.1253B4941E4CSC.CHSSVRCHS.a755a42775434a6840a37b706e1ce7b6");
+//USE HTTP NOT HTTPS!!!!!!!!!!!!!
+$coordinates = getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=GA1253B4944174.SevereWeatherStatement.1253B4945114GA.JAXSVSJAX.b24614de1c76f77c178f5706395d8d44");
+$json = getJSON("Terrell,%20GA");
+
 ?> 
 <!DOCTYPE html>
 <html>
@@ -32,13 +35,19 @@ require_once('scripts/php/getxml.php');
 
 
 
-    coordinates = "<?php echo $polygonString; ?>;";
+    coordinates = "<?php echo $coordinates; ?>;";
 
-    console.log(coordinates);
 
     //getPolygon("44.71,-72.91 44.32,-72.98 44.09,-73.07 44.07,-73.82 44.32,-73.64 44.66,-73.42 44.71,-72.91");
 
     getPolygon(coordinates);
+
+        jsonString = <?php echo $json; ?>;
+
+    json = JSON.parse(jsonString);
+
+    console.log(json);
+
 
 
     /*
