@@ -2,10 +2,8 @@
  
 require_once('scripts/php/getxml.php'); 
 //USE HTTP NOT HTTPS!!!!!!!!!!!!!
-$coordinates = getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=SC1253B494A1F0.SevereThunderstormWarning.1253B494C644SC.ILMSVRILM.842053ee7aca48aa7f35fdc68574532b");
-$center = centerMap("Darlington, SC");
-
-
+$coordinates = getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=GA1253B4949318.SevereThunderstormWarning.1253B4949F34GA.CHSSVSCHS.ff1e54d8f3fa208eca10232f4dbd8c80");
+$json = getJSON("Terrell,%20GA");
 
 ?> 
 <!DOCTYPE html>
@@ -37,17 +35,18 @@ $center = centerMap("Darlington, SC");
 
 
 
-    coordinates = "<?php echo $coordinates; ?>";
+    coordinates = "<?php echo $coordinates; ?>;";
 
 
     //getPolygon("44.71,-72.91 44.32,-72.98 44.09,-73.07 44.07,-73.82 44.32,-73.64 44.66,-73.42 44.71,-72.91");
 
     getPolygon(coordinates);
 
-    center = "<?php echo $center; ?>";
-   
-    centerChunk = center.split(" ");
+        jsonString = <?php echo $json; ?>;
 
+    json = JSON.parse(jsonString);
+
+    console.log(json);
 
 
 

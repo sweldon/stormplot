@@ -33,12 +33,12 @@ return $polygonString;
 
 
 }
-
+getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=GA1253B4949318.SevereThunderstormWarning.1253B4949F34GA.CHSSVSCHS.ff1e54d8f3fa208eca10232f4dbd8c80");
 
 function getJSON($address)
 {
-	$clean = str_replace(" ","%20", $address);
-	$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$clean;
+	$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$address;
+
 
 
 	$ch = curl_init($url);
@@ -63,29 +63,26 @@ curl_close($ch);
 // $general_lng =  $json->results[0]->geometry->location->lng;
 
 // $center = array($general_lat,$general_lng);
-
-
-
-return $rawjson;
+return $rawjson;;
 
 
 
 
 }
 
-function centerMap($location)
+function centerMap($address)
 {
-	$rawjson = getJSON($location);
-	$json = json_decode($rawjson);
+	$json = getJSON($address);
+
 	$general_lat = $json->results[0]->geometry->location->lat;
 	$general_lng =  $json->results[0]->geometry->location->lng;
 
-	return $general_lat." ".$general_lng;
+	$center = array($general_lat,$general_lng);
+
+	return $center;
+
 
 }
-
-
-
 
 
 ?>
