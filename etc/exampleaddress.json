@@ -1,0 +1,79 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "1",
+               "short_name" : "1",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "Wood Creek Road",
+               "short_name" : "Wood Creek Rd",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "New Fairfield",
+               "short_name" : "New Fairfield",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Fairfield County",
+               "short_name" : "Fairfield County",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Connecticut",
+               "short_name" : "CT",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "06812",
+               "short_name" : "06812",
+               "types" : [ "postal_code" ]
+            },
+            {
+               "long_name" : "4115",
+               "short_name" : "4115",
+               "types" : [ "postal_code_suffix" ]
+            }
+         ],
+         "formatted_address" : "1 Wood Creek Road, New Fairfield, CT 06812, USA",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : 41.4676771,
+                  "lng" : -73.47374669999999
+               },
+               "southwest" : {
+                  "lat" : 41.4676704,
+                  "lng" : -73.4737628
+               }
+            },
+            "location" : {
+               "lat" : 41.4676771,
+               "lng" : -73.47374669999999
+            },
+            "location_type" : "RANGE_INTERPOLATED",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 41.4690227302915,
+                  "lng" : -73.4724057697085
+               },
+               "southwest" : {
+                  "lat" : 41.4663247697085,
+                  "lng" : -73.47510373029151
+               }
+            }
+         },
+         "place_id" : "Ei8xIFdvb2QgQ3JlZWsgUm9hZCwgTmV3IEZhaXJmaWVsZCwgQ1QgMDY4MTIsIFVTQQ",
+         "types" : [ "street_address" ]
+      }
+   ],
+   "status" : "OK"
+}
