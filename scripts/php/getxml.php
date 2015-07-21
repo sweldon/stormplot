@@ -1,6 +1,9 @@
 <?php
 
-$url		= "http://alerts.weather.gov/cap/wwacapget.php?x=VT1253B493DC48.SevereThunderstormWarning.1253B493F73CVT.BTVSVSBTV.3ce51d4efac4a8e59e9fde95741277ae";
+// function getCoordinates($url)
+// {
+
+$url = "http://alerts.weather.gov/cap/wwacapget.php?x=GA1253B49407A4.SevereThunderstormWarning.1253B4942A04GA.TAESVRTAE.97c3a759aa0cda66e9a6f931ab877c24";
 
 $ch = curl_init($url);
 
@@ -24,6 +27,9 @@ $polygon = $xml->xpath("/*/*/*/*[local-name()='polygon']/text()");
 
 $polygonString = $polygon[0];
 
-echo $polygonString;
+//return $polygonString;
+//}
+
+//getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=SC1253B493FC50.SevereThunderstormWarning.1253B4941E4CSC.CHSSVRCHS.a755a42775434a6840a37b706e1ce7b6");
 
 ?>

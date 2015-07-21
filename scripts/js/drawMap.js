@@ -1,8 +1,9 @@
-function initialize() {
+function initialize() 
+{
   var mapOptions = {
     zoom: 10,
     //Center at your location, at the moment it is the county
-    center: new google.maps.LatLng(44.0886671, -73.30262200000001),
+    center: new google.maps.LatLng(31.7370079, -84.48026059999999),
     mapTypeId: google.maps.MapTypeId.TERRAIN
 
   };
@@ -30,4 +31,3 @@ function initialize() {
   AOE.setMap(map);
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
