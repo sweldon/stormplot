@@ -23,10 +23,12 @@
 // Parse <polygon> object in XML 
 
 // XML example: view-source:http://alerts.weather.gov/cap/wwacapget.php?x=KS1253B493082C.FlashFloodWarning.1253B493F160KS.SGFFFWSGF.41fb5af2f9aa236c2ada8d684b37af3c
+var rawPolygon = 
 
 
 // Get polygon coordinates and parse into readable array
-var polygonString = "37.46,-95.1 37.46,-95.08 37.4,-94.9 37.37,-94.84 37.34,-94.81 37.26,-94.81 37.23,-94.84 37.14,-94.96 37.11,-95.04 37.12,-95.08 37.38,-95.08 37.39,-95.09 37.46,-95.1";
+//var polygonString = "37.46,-95.1 37.46,-95.08 37.4,-94.9 37.37,-94.84 37.34,-94.81 37.26,-94.81 37.23,-94.84 37.14,-94.96 37.11,-95.04 37.12,-95.08 37.38,-95.08 37.39,-95.09 37.46,-95.1";
+var polygonString = rawPolygon;
 var stringChunked = polygonString.split(" ");
 
 console.log(stringChunked);
@@ -90,5 +92,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
   </head>
   <body>
     <div id="map-canvas"></div>
+    <div id="test"></div>
   </body>
 </html>
