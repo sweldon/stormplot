@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href='http://alerts.weather.gov/cap/capatom.xsl' type='text/xsl'?>
+<!--
+This atom/xml feed is an index to active advisories, watches and warnings 
+issued by the National Weather Service.  This index file is not the complete 
+Common Alerting Protocol (CAP) alert message.  To obtain the complete CAP 
+alert, please follow the links for each entry in this index.  Also note the 
+CAP message uses a style sheet to convey the information in a human readable 
+format.  Please view the source of the CAP message to see the complete data 
+set.  Not all information in the CAP message is contained in this index of 
+active alerts.
+-->
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:cap="urn:oasis:names:tc:emergency:cap:1.1" xmlns:ha="http://www.alerting.net/namespace/index_1.0">
+   <!-- http-date = Wed, 22 Jul 2015 03:22:00 GMT -->
+   <id>http://alerts.weather.gov/cap/us.atom</id>
+   <logo>http://alerts.weather.gov/images/xml_logo.gif</logo>
+   <generator>NWS CAP Server</generator>
+   <updated>2015-07-21T23:22:00-04:00</updated>
+   <author>
+      <name>w-nws.webmaster@noaa.gov</name>
+   </author>
+   <title>Current Watches, Warnings and Advisories for the United States Issued by the National Weather Service</title>
+   <link href="http://alerts.weather.gov/cap/us.atom" />
+   <entry>
+      <id>http://alerts.weather.gov/cap/wwacapget.php?x=AK1253B49427AC.SpecialWeatherStatement.1253B4A185F0AK.AJKSPSAJK.c573963a7f6719c359fd9917def4e1b3</id>
+      <updated>2015-07-21T11:39:00-08:00</updated>
+      <published>2015-07-21T11:39:00-08:00</published>
+      <author>
+         <name>w-nws.webmaster@noaa.gov</name>
+      </author>
+      <title>Special Weather Statement issued July 21 at 11:39AM AKDT by NWS</title>
+      <link href="http://alerts.weather.gov/cap/wwacapget.php?x=AK1253B49427AC.SpecialWeatherStatement.1253B4A185F0AK.AJKSPSAJK.c573963a7f6719c359fd9917def4e1b3" />
+      <summary>...TAIYA RIVER RISING TO NEAR BANKULL THIS EVENING... A WARM DAY EXPECTED ACROSS THE NORTHERN PANHANDLE WHICH WILL INCREASE THE AMOUNT OF SNOW MELT THROUGH THE MORNING AND AFTERNOON AND INCREASE THE WATER LEVELS ON THE TAIYA RIVER. WATER LEVELS ARE 15.2 FEET AT 11 AM AKDT AND ARE EXPECTED TO RISE TO 16.0 FEET...WHICH IS BANKFULL LEVEL...THIS EVENING AROUND 10 PM AKDT</summary>
+      <cap:event>Special Weather Statement</cap:event>
+      <cap:effective>2015-07-21T11:39:00-08:00</cap:effective>
+      <cap:expires>2015-07-21T23:00:00-08:00</cap:expires>
+      <cap:status>Actual</cap:status>
+      <cap:msgType>Alert</cap:msgType>
+      <cap:category>Met</cap:category>
+      <cap:urgency>Expected</cap:urgency>
+      <cap:severity>Minor</cap:severity>
+      <cap:certainty>Observed</cap:certainty>
+      <cap:areaDesc>Taiya Inlet and Klondike Highway</cap:areaDesc>
+      <cap:polygon />
+      <cap:geocode>
+         <valueName>FIPS6</valueName>
+         <value>002230</value>
+         <valueName>UGC</valueName>
+         <value>AKZ018</value>
+      </cap:geocode>
+      <cap:parameter>
+         <valueName>VTEC</valueName>
+         <value />
+      </cap:parameter>
+   </entry>
+   <entry>
+      <id>http://alerts.weather.gov/cap/wwacapget.php?x=AK1253B49427AC.SpecialWeatherStatement.1253B4A185F0AK.AJKSPSAJK.7a1e1aeff40544aea786b32b4da447c9</id>
+      <updated>2015-07-21T11:39:00-08:00</updated>
+      <published>2015-07-21T11:39:00-08:00</published>
+      <author>
+         <name>w-nws.webmaster@noaa.gov</name>
+      </author>
+      <title>Special Weather Statement issued July 21 at 11:39AM AKDT by NWS</title>
+      <link href="http://alerts.weather.gov/cap/wwacapget.php?x=AK1253B49427AC.SpecialWeatherStatement.1253B4A185F0AK.AJKSPSAJK.7a1e1aeff40544aea786b32b4da447c9" />
+      <summary>...MENDENHALL LAKE HAS CRESTED... THE GLACIER DAM RELEASE FROM SUICIDE BASIN INTO THE MENDENHALL LAKE HAS REACHED ITS PEAK THIS MORNING AND IS FALLING AT A QUICK PACE. THE LAKE CRESTED AT 7.2 FEET AT 10 AM AKDT. AT 11 AM THE LAKE LEVEL WAS 7.1 FEET AND WILL CONTINUE TO FALL THROUGH TONIGHT. THIS WILL THE FINAL STATEMENT ON THE EVENT.</summary>
+      <cap:event>Special Weather Statement</cap:event>
+      <cap:effective>2015-07-21T11:39:00-08:00</cap:effective>
+      <cap:expires>2015-07-21T23:00:00-08:00</cap:expires>
+      <cap:status>Actual</cap:status>
+      <cap:msgType>Alert</cap:msgType>
+      <cap:category>Met</cap:category>
+      <cap:urgency>Expected</cap:urgency>
+      <cap:severity>Minor</cap:severity>
+      <cap:certainty>Observed</cap:certainty>
+      <cap:areaDesc>Juneau Borough and Northern Admiralty Island</cap:areaDesc>
+      <cap:polygon />
+      <cap:geocode>
+         <valueName>FIPS6</valueName>
+         <value>002105 002110 002195</value>
+         <valueName>UGC</valueName>
+         <value>AKZ025</value>
+      </cap:geocode>
+      <cap:parameter>
+         <valueName>VTEC</valueName>
+         <value />
+      </cap:parameter>
+   </entry>
+</feed>
