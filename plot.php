@@ -2,8 +2,12 @@
  
 require_once('scripts/php/getxml.php'); 
 //USE HTTP NOT HTTPS!!!!!!!!!!!!!
-$coordinates = getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=GA1253B4944174.SevereWeatherStatement.1253B4945114GA.JAXSVSJAX.b24614de1c76f77c178f5706395d8d44");
-$json = getJSON("Terrell,%20GA");
+$alert = "http://alerts.weather.gov/cap/wwacapget.php?x=TX1253B4A29D3C.FloodWarning.1253B4C1B820TX.AMAFLWAMA.c89702a540211340246e82674a51c6ba";
+$coordinates = getCoordinates($alert);
+$county = getArea($alert);
+$center = centerMap($county);
+
+
 
 ?> 
 <!DOCTYPE html>
@@ -35,18 +39,17 @@ $json = getJSON("Terrell,%20GA");
 
 
 
-    coordinates = "<?php echo $coordinates; ?>;";
+    coordinates = "<?php echo $coordinates; ?>";
 
 
     //getPolygon("44.71,-72.91 44.32,-72.98 44.09,-73.07 44.07,-73.82 44.32,-73.64 44.66,-73.42 44.71,-72.91");
 
     getPolygon(coordinates);
 
-        jsonString = <?php echo $json; ?>;
+    center = "<?php echo $center; ?>";
+   
+    centerChunk = center.split(" ");
 
-    json = JSON.parse(jsonString);
-
-    console.log(json);
 
 
 

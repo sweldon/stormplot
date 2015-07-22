@@ -1,11 +1,10 @@
 <?php
 
-function getCoordinates($alerturl)
+function curlPage($url)
 {
 
-$url = $alerturl;
-
-$ch = curl_init($url);
+	$curlURL = $url;
+	$ch = curl_init($curlURL);
 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
@@ -14,10 +13,17 @@ $ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_PROXYPORT,80);
 	curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
 
-$html = curl_exec($ch);
-curl_close($ch);
+	$source = curl_exec($ch);
+	curl_close($ch);
 
+	return $source;
 
+}
+
+function getCoordinates($alerturl)
+{
+
+$html = curlPage($alerturl);
 
 $xml = new SimpleXMLElement($html);
 #print_r($xml);
@@ -37,22 +43,10 @@ return $polygonString;
 
 function getJSON($address)
 {
-	$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$address;
+	$clean = str_replace(" ","%20", $address);
+	$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$clean;
 
-
-
-	$ch = curl_init($url);
-
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-	curl_setopt($ch, CURLOPT_PROXY, "http://rdg-proxy.am.boehringer.com");
-	curl_setopt($ch, CURLOPT_PROXYPORT,80);
-	curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
-
-$rawjson = curl_exec($ch);
-curl_close($ch);
-
+	$rawjson = curlPage($url);
 
 
 //$json = json_decode($rawjson);
@@ -63,12 +57,59 @@ curl_close($ch);
 // $general_lng =  $json->results[0]->geometry->location->lng;
 
 // $center = array($general_lat,$general_lng);
-return $rawjson;;
 
 
 
+return $rawjson;
+}
+
+function centerMap($location)
+{
+	$rawjson = getJSON($location);
+	$json = json_decode($rawjson);
+	$general_lat = $json->results[0]->geometry->location->lat;
+	$general_lng =  $json->results[0]->geometry->location->lng;
+
+	return $general_lat." ".$general_lng;
 
 }
+
+function getArea($alert)
+{
+
+$html = curlPage($alert);
+
+$xml = new SimpleXMLElement($html);
+#print_r($xml);
+
+// IDEA: RETURN WHOLE XML AND PARSE WITH JAVASCRIPT
+
+//FIRST 2 DIGITS OF <geocode> GIVE STATE
+$geocode = $xml->xpath("/*/*/*/*[local-name()='geocode'][last()]/text()");
+
+$stateString = $geocode[0];
+
+
+$state = (string)$stateString->value;
+
+$state = substr($state, 0, 2);
+
+
+
+$areaDesc = $xml->xpath("/*/*/*/*[local-name()='areaDesc']/text()");
+
+$areaString = (string)$areaDesc[0];
+
+$areas = explode(";", $areaString);
+
+$county = $areas[0].", ".$state;
+
+return $county;
+
+}
+
+
+
 
 
 ?>
