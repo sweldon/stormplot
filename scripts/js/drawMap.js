@@ -3,6 +3,7 @@ function initialize()
   var mapOptions = {
     zoom: 12,
     //Center at your location, at the moment it is the county
+    //eyeCoords for center of storm, centerChunked for center of county
     center: new google.maps.LatLng(eyeCoords[0], eyeCoords[1]),
     mapTypeId: google.maps.MapTypeId.TERRAIN
 

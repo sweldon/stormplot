@@ -14,7 +14,7 @@ RSS Library: http://www.nws.noaa.gov/rss/
 
 */
 
-$acceptedTypes = array("FloodWarning","FloodAdvisory","FlashFloodWatch","SpecialWeatherStatement","SevereThunderstormWarning");
+$acceptedTypes = array("FloodWarning","FloodAdvisory","FlashFloodWatch","SpecialWeatherStatement","SevereThunderstormWarning","TornadoWarning");
 
 $url = "http://alerts.weather.gov/cap/us.php?x=1";
 

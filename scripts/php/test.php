@@ -1,13 +1,9 @@
 <?php
-require_once('getxml.php'); 
+$url = "http://alerts.weather.gov/cap/wwacapget.php?x=AL1253B4A35B14.SpecialWeatherStatement.1253B4A3608CAL.HUNSPSHUN.d62f6b4290dd5cccf7a342728fcd45b4";
 
-function eyeOfStorm($polygon)
-{
+$clean = substr($url, 46);
 
-	
-	
-}
+echo $clean;
 
-eyeOfStorm("37.47,-101.52 37.58,-101.52 37.56,-101.24 37.42,-101.22 37.46,-101.4 37.47,-101.52");
 ?>
 

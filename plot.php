@@ -2,7 +2,11 @@
  
 require_once('scripts/php/getxml.php'); 
 //USE HTTP NOT HTTPS!!!!!!!!!!!!!
-$alert = "http://alerts.weather.gov/cap/wwacapget.php?x=AL1253B4A3478C.SevereThunderstormWarning.1253B4A3608CAL.BMXSVSBMX.46618850bf2a2ce3e3083951a2a37391";
+$alertraw = $_GET['alert'];
+$alertID =  substr($alertraw, 46);
+
+//$alert = "http://alerts.weather.gov/cap/wwacapget.php?x=AL1253B4A3478C.SevereThunderstormWarning.1253B4A3608CAL.BMXSVSBMX.46618850bf2a2ce3e3083951a2a37391"; 
+$alert = "http://alerts.weather.gov/cap/wwacapget.php?x=".$alertID;
 $coordinates = getCoordinates($alert);
 $county = getArea($alert);
 //$center = centerMap($county);
@@ -49,7 +53,11 @@ $county = getArea($alert);
     eyeCoords = eyeOfStorm(coordinates);
 
 
+    /* getPolygon(coordinates);
 
+     center = "<?php echo $center; ?>";
+   
+    centerChunk = center.split(" "); */
     
 
 
