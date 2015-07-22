@@ -36,6 +36,16 @@ body
 	height:50px;
 	line-height: 50px;
 }
+#use-recent
+{
+	background-color: #c7c7c7;
+	padding:10px;
+	width:400px;
+
+	text-align: center;
+	height:50px;
+	line-height: 50px;
+}
 
 /*#feed
 {

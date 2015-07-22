@@ -25,7 +25,12 @@ $xml = new SimpleXMLElement($rawxml);
 
 
 http://alerts.weather.gov/cap/wwacapget.php?x=AL1253B4A2F0D4.HeatAdvisory.1253B4AFB6C0AL.MOBNPWMOB.37dd2dbeec77dcbd81e72718a99b8b2f
-$entry = $xml->xpath("/*/*[local-name()='entry']/*[local-name()='id']/text()");
+// ALL ENTRIES:
+//$entry = $xml->xpath("/*/*[local-name()='entry']/*[local-name()='id']/text()");
+// MOST RECENT 10: 
+$entry = $xml->xpath("/*/*[local-name()='entry'][position() >= 0 and position() < 12]/*[local-name()='id']/text()");
+
+$newxml = new SimpleXMLElement('<xml/>');
 
 foreach($entry as $id)
 {
@@ -33,11 +38,15 @@ foreach($entry as $id)
 	$link = $id;
 	if(in_array($type, $acceptedTypes))
 	{
-		echo $type."->".$link."<br />";
+		$xmlitem = $newxml->addChild('entry');
+		$xmlitem->addChild('type',"".$type."");
+		$xmlitem->addChild('link',"".$link."");
+		//echo $link."<br />";
 	}
 	
 }
-
+Header('Content-type: text/xml');
+print($newxml->asXML());
 
 }
 

@@ -1,3 +1,21 @@
+<?php
+require_once('scripts/php/getxml.php'); 
+function getRecentAlerts()
+{
+	$html = curlPage("http://alerts.weather.gov/cap/us.php?x=1");
+	$xml = new SimpleXMLElement($html);
+	$test = $xml->xpath("/*/*[local-name()='entry'][1]");
+	$mostrecent = (string)$test[0]->id;
+	//print_r($mostrecent);
+	return $mostrecent;
+
+}
+
+$recent = getRecentAlerts();
+
+?>
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -36,10 +54,9 @@ Use My Home
 
 </form>
 <br />
-<a href="http://localhost/dev/plot.html?alert=">
+<a href="plot.php?alert=<?php echo $recent; ?>">
 <div id="use-recent">
 Most Recent Alert<br />
-
 </div>
 </a>
 </center>
