@@ -7,11 +7,11 @@ function curlPage($url)
 	$ch = curl_init($curlURL);
 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	//curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
+	curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-	// curl_setopt($ch, CURLOPT_PROXY, "http://rdg-proxy.am.boehringer.com");
-	// curl_setopt($ch, CURLOPT_PROXYPORT,80);
-	// curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
+	curl_setopt($ch, CURLOPT_PROXY, "http://rdg-proxy.am.boehringer.com");
+	curl_setopt($ch, CURLOPT_PROXYPORT,80);
+	curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
 
 	$source = curl_exec($ch);
 	curl_close($ch);
@@ -45,22 +45,6 @@ function getJSON($address)
 {
 	$clean = str_replace(" ","%20", $address);
 	$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$clean;
-<<<<<<< HEAD
-=======
-
-
-	$ch = curl_init($url);
-
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	//curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-	// curl_setopt($ch, CURLOPT_PROXY, "http://rdg-proxy.am.boehringer.com");
-	// curl_setopt($ch, CURLOPT_PROXYPORT,80);
-	// curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
-
-$rawjson = curl_exec($ch);
-curl_close($ch);
->>>>>>> cc03b33ab1608934f1e3258dd3c1bec881d1ef1d
 
 	$rawjson = curlPage($url);
 
@@ -77,13 +61,6 @@ curl_close($ch);
 
 
 return $rawjson;
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> cc03b33ab1608934f1e3258dd3c1bec881d1ef1d
 }
 
 function centerMap($location)
@@ -94,7 +71,6 @@ function centerMap($location)
 	$general_lng =  $json->results[0]->geometry->location->lng;
 
 	return $general_lat." ".$general_lng;
-<<<<<<< HEAD
 
 }
 
@@ -124,13 +100,20 @@ $areaDesc = $xml->xpath("/*/*/*/*[local-name()='areaDesc']/text()");
 
 $areaString = (string)$areaDesc[0];
 
+if(strpos($areaString,";") !== false)
+{
 $areas = explode(";", $areaString);
 
+//RIGHT NOW ONLY USES 1 OF THE LISTED COUNTIES
+
 $county = $areas[0].", ".$state;
+}
+else
+{
+	$county = $areaString.", ".$state;
+}
 
 return $county;
-=======
->>>>>>> cc03b33ab1608934f1e3258dd3c1bec881d1ef1d
 
 }
 

@@ -2,7 +2,7 @@
  
 require_once('scripts/php/getxml.php'); 
 //USE HTTP NOT HTTPS!!!!!!!!!!!!!
-$alert = "http://alerts.weather.gov/cap/wwacapget.php?x=TX1253B4A29D3C.FloodWarning.1253B4C1B820TX.AMAFLWAMA.c89702a540211340246e82674a51c6ba";
+$alert = "http://alerts.weather.gov/cap/wwacapget.php?x=IL1253B4A2E580.FloodWarning.1253B4B227C0IL.LSXFLSLSX.8c1d726d3448f3dc91bad407afded36e";
 $coordinates = getCoordinates($alert);
 $county = getArea($alert);
 $center = centerMap($county);
