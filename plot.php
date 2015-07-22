@@ -2,8 +2,8 @@
  
 require_once('scripts/php/getxml.php'); 
 //USE HTTP NOT HTTPS!!!!!!!!!!!!!
-$coordinates = getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=NC1253B4A0D36C.SevereThunderstormWarning.1253B4A0F568NC.MHXSVRMHX.697dc3677acb958c1e385be679d44b3b");
-$center = centerMap("Onslow, NC");
+$coordinates = getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=AR1253B4A0FD38.FlashFloodWarning.1253B4A15EE0AR.MEGFFSMEG.d0a1a6237d119e7526111a4bbd02b91a");
+$center = centerMap("Lawrence, AR");
 
 
 
