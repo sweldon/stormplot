@@ -1,9 +1,9 @@
 function initialize() 
 {
   var mapOptions = {
-    zoom: 10,
+    zoom: 12,
     //Center at your location, at the moment it is the county
-    center: new google.maps.LatLng(centerChunk[0], centerChunk[1]),
+    center: new google.maps.LatLng(eyeCoords[0], eyeCoords[1]),
     mapTypeId: google.maps.MapTypeId.TERRAIN
 
   };

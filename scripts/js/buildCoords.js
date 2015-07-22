@@ -27,5 +27,8 @@ for(var i = 0;i<stringChunked.length;i++)
 
 coordinateArray[i] = new google.maps.LatLng(stringChunked[i][0], stringChunked[i][1]);
 }
+
+return coordinateArray;
+
 }
 
