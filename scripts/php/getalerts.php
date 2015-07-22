@@ -1,5 +1,5 @@
 <?php
-
+require_once('getxml.php'); 
 function getFeed()
 {
 
@@ -14,31 +14,28 @@ RSS Library: http://www.nws.noaa.gov/rss/
 
 */
 
+$acceptedTypes = array("FloodWarning","FloodAdvisory","FlashFloodWatch","SpecialWeatherStatement","SevereThunderstormWarning");
+
 $url = "http://alerts.weather.gov/cap/us.php?x=1";
 
 
-$ch = curl_init($url);
-
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-//curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-// curl_setopt($ch, CURLOPT_PROXY, "http://rdg-proxy.am.boehringer.com");
-// curl_setopt($ch, CURLOPT_PROXYPORT,80);
-// curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
-
-$rawxml = curl_exec($ch);
-curl_close($ch);
-
+$rawxml = curlPage($url);
 
 $xml = new SimpleXMLElement($rawxml);
 
 
-
+http://alerts.weather.gov/cap/wwacapget.php?x=AL1253B4A2F0D4.HeatAdvisory.1253B4AFB6C0AL.MOBNPWMOB.37dd2dbeec77dcbd81e72718a99b8b2f
 $entry = $xml->xpath("/*/*[local-name()='entry']/*[local-name()='id']/text()");
 
 foreach($entry as $id)
 {
-	echo $id."<br />";
+	$type = substr($id,61,-58);
+	$link = $id;
+	if(in_array($type, $acceptedTypes))
+	{
+		echo $type."->".$link."<br />";
+	}
+	
 }
 
 
