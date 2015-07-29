@@ -1,88 +1,72 @@
 <?php
-
+function curlPage($url)
+{
+	$curlURL = $url;
+	$ch = curl_init($curlURL);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	//curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
+//	curl_setopt($ch, CURLOPT_PROXY, "http://rdg-proxy.am.boehringer.com");
+	//curl_setopt($ch, CURLOPT_PROXYPORT,80);
+//	curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
+	$source = curl_exec($ch);
+	curl_close($ch);
+	return $source;
+}
 function getCoordinates($alerturl)
 {
-
-$url = $alerturl;
-
-$ch = curl_init($url);
-
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	//curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-	// curl_setopt($ch, CURLOPT_PROXY, "http://rdg-proxy.am.boehringer.com");
-	// curl_setopt($ch, CURLOPT_PROXYPORT,80);
-	// curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
-
-$html = curl_exec($ch);
-curl_close($ch);
-
-
-
+$html = curlPage($alerturl);
 $xml = new SimpleXMLElement($html);
 #print_r($xml);
-
 // IDEA: RETURN WHOLE XML AND PARSE WITH JAVASCRIPT
-
 //FIRST 2 DIGITS OF <geocode> GIVE STATE
 $polygon = $xml->xpath("/*/*/*/*[local-name()='polygon']/text()");
-
 $polygonString = $polygon[0];
-
 return $polygonString;
-
-
 }
-getCoordinates("http://alerts.weather.gov/cap/wwacapget.php?x=GA1253B4949318.SevereThunderstormWarning.1253B4949F34GA.CHSSVSCHS.ff1e54d8f3fa208eca10232f4dbd8c80");
-
 function getJSON($address)
 {
-	$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$address;
-
-
-
-	$ch = curl_init($url);
-
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	//curl_setopt($ch, CURLOPT_PROXYAUTH, CURLAUTH_NTLM);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION,1);
-	// curl_setopt($ch, CURLOPT_PROXY, "http://rdg-proxy.am.boehringer.com");
-	// curl_setopt($ch, CURLOPT_PROXYPORT,80);
-	// curl_setopt($ch, CURLOPT_PROXYUSERPWD,"AM\\sweldon1:Password6");
-
-$rawjson = curl_exec($ch);
-curl_close($ch);
-
-
-
+	$clean = str_replace(" ","%20", $address);
+	$url = "http://maps.googleapis.com/maps/api/geocode/json?address=".$clean;
+	$rawjson = curlPage($url);
 //$json = json_decode($rawjson);
-
 // IDEA: RETURN WHOLE JSON AND PARSE WITH JAVASCRIPT
-
 // $general_lat = $json->results[0]->geometry->location->lat;
 // $general_lng =  $json->results[0]->geometry->location->lng;
-
 // $center = array($general_lat,$general_lng);
-return $rawjson;;
-
-
-
-
+return $rawjson;
 }
-
-function centerMap($address)
+function centerMap($location)
 {
-	$json = getJSON($address);
-
+	$rawjson = getJSON($location);
+	$json = json_decode($rawjson);
 	$general_lat = $json->results[0]->geometry->location->lat;
 	$general_lng =  $json->results[0]->geometry->location->lng;
-
-	$center = array($general_lat,$general_lng);
-
-	return $center;
-
-
+	return $general_lat." ".$general_lng;
 }
-
-
+function getArea($alert)
+{
+$html = curlPage($alert);
+$xml = new SimpleXMLElement($html);
+#print_r($xml);
+// IDEA: RETURN WHOLE XML AND PARSE WITH JAVASCRIPT
+//FIRST 2 DIGITS OF <geocode> GIVE STATE
+$geocode = $xml->xpath("/*/*/*/*[local-name()='geocode'][last()]/text()");
+$stateString = $geocode[0];
+$state = (string)$stateString->value;
+$state = substr($state, 0, 2);
+$areaDesc = $xml->xpath("/*/*/*/*[local-name()='areaDesc']/text()");
+$areaString = (string)$areaDesc[0];
+if(strpos($areaString,";") !== false)
+{
+$areas = explode(";", $areaString);
+//RIGHT NOW ONLY USES 1 OF THE LISTED COUNTIES
+$county = $areas[0].", ".$state;
+}
+else
+{
+	$county = $areaString.", ".$state;
+}
+return $county;
+}
 ?>
