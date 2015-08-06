@@ -117,6 +117,49 @@ return $county;
 
 }
 
+function getCounty($lat,$lng)
+{
+
+	$html = curlPage("http://data.fcc.gov/api/block/2010/find?latitude=".$lat."&longitude=".$lng."");
+	$xml = new SimpleXMLElement($html);
+	$county = $xml->xpath('/*/*[local-name()="County"]/@name');
+	return (string)$county[0][0];
+	
+
+
+}
+
+function getIP()
+{
+
+	$html = curlPage("http://ip4.me/");
+	$dom = new DOMDocument;
+	@$dom->loadHTML($html);
+	$xpath = new DOMXPath($dom);
+	$ip = $xpath->evaluate("//table//font[@face='Arial, Monospace']");
+	$ipVal = $ip[0]->textContent;
+
+
+	return $ipVal;	
+}
+function locateIP($ip)
+{
+
+	$html = curlPage("http://freegeoip.net/xml/".$ip);
+
+	$xml = new SimpleXMLElement($html);
+	$lat = $xml->xpath('/*');
+	$latVal = (string)$lat[0]->Latitude;
+	$lngVal = (string)$lat[0]->Longitude;
+	
+
+	return [$latVal, $lngVal];
+
+}
+
+
+
+
 
 
 

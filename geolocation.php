@@ -1,3 +1,16 @@
+<?php
+
+require_once('scripts/php/getxml.php'); 
+
+$ip = getIP();
+$ipLoc = locateIP($ip);
+$lat = $ipLoc[0];
+$lng = $ipLoc[1];
+$countyFromIP = getCounty($lat, $lng);
+
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -50,17 +63,26 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
-// var northEast = new google.maps.LatLng(37.34,-94.6176579);
-// var southWest = new google.maps.LatLng(36.9986241,-95.07532399999999);
-// var bounds = new google.maps.LatLngBounds(southWest,northEast);
-// map.fitBounds(bounds);
+// console.log(<?php echo $lat; ?>, <?php echo $lng; ?>)
+// var pos =  new google.maps.LatLng(<?php echo $lat; ?>, <?php echo $lng; ?>);
 
-//GEO LOCATION:
+//       var infowindow = new google.maps.InfoWindow({
+//         map: map,
+//         position: pos,
+//         content: 'YOU: <?php echo $countyFromIP; ?> (county)'
+//       });
+
+//       map.setCenter(pos);
+
+
+
+//GEO LOCATION with JAVASCRIPT (much more precise atm):
 
   if(navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);
+
 
       console.log(pos);
 
@@ -70,7 +92,7 @@ function initialize() {
       var infowindow = new google.maps.InfoWindow({
         map: map,
         position: pos,
-        content: 'YOU'
+        content: 'YOU: <?php echo $countyFromIP; ?> (county)'
       });
 
       map.setCenter(pos);
@@ -81,10 +103,13 @@ function initialize() {
     // Browser doesn't support Geolocation
     handleNoGeolocation(false);
   }
+
+
+
 }
 
 
-
+// UN COMMMENT WITH GEOLOCATION
 function handleNoGeolocation(errorFlag) {
   if (errorFlag) {
     var content = 'Error: The Geolocation service failed.';
@@ -102,6 +127,8 @@ function handleNoGeolocation(errorFlag) {
   map.setCenter(options.position);
 }
 
+
+// ALWAYS NEED THIS
 google.maps.event.addDomListener(window, 'load', initialize);
 
 

@@ -18,17 +18,23 @@ function curlPage($url)
 	return $source;
 
 }
-function getCounty($lat,$lng)
+
+function pinPoint($ip)
 {
 
-	$html = curlPage("http://data.fcc.gov/api/block/2010/find?latitude=".$lat."&longitude=".$lng."");
+	$html = curlPage("http://freegeoip.net/xml/".$ip);
+
 	$xml = new SimpleXMLElement($html);
-	$county = $xml->xpath('/*/*[local-name()="County"]/@name');
-	return (string)$county[0][0];
+	$lat = $xml->xpath('/*');
+	$latVal = (string)$lat[0]->Latitude;
+	$lngVal = (string)$lat[0]->Longitude;
 	
+
+		
+	print_r([$latVal, $lngVal]);
 }
 
-print_r(getCounty(41.375209600000005,-73.50734950000003));
+pinPoint("148.188.192.60");
 
 ?>
 
