@@ -27,7 +27,7 @@ $recent = getRecentAlerts();
 <div id="container">
 
 <div id="choices">
-<a href="http://localhost/dev/geolocation.html">
+<a href="http://localhost/dev/geolocation.php">
 <div id="use-here">
 Use This Location
 </div>
