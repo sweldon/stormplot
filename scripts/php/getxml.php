@@ -123,6 +123,7 @@ function getCounty($lat,$lng)
 	$html = curlPage("http://data.fcc.gov/api/block/2010/find?latitude=".$lat."&longitude=".$lng."");
 	$xml = new SimpleXMLElement($html);
 	$county = $xml->xpath('/*/*[local-name()="County"]/@name');
+	$state = $xml->xpath('/*/*[local-name()="State"]/@code');
 	return (string)$county[0][0];
 	
 
